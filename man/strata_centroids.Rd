@@ -5,7 +5,8 @@
 \title{Partition coordinates by strata and find mean coordinates}
 \usage{
 strata_centroids(data, stratum = "Population", longitude = "Longitude",
-  latitude = "Latitude")
+  latitude = "Latitude", mode = c("data.frame", "SpatialPoints",
+  "sf")[1])
 }
 \arguments{
 \item{data}{A data frame object with coordinates and a column to be used as

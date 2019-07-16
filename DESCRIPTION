@@ -11,12 +11,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-    tidyverse,
-    cartography,
-    sp,
-    raster,
-    sf,
-    ggplot2,
     dplyr
 RoxygenNote: 6.1.1
 Suggests: 

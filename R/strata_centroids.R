@@ -8,15 +8,18 @@
 #' @param stratum The name of the column to use as the partition.
 #' @param latitude The name of the column with the Y-coordinate (default = Latitude)
 #' @param longitude The name of the column with the X-coordinate (default = Longitude)
+#' @param mode The format of the returned object as a data.frame (default), spatialPoints or sf object.
 #' @return A data.frame object with strata and latitude and longitude
 #'
 #' @author Rodney J. Dyer <rjdyer@@vcu.edu>
-#' @import dplyr
+#' @importFrom dplyr group_by summarize
+#' @importFrom sp SpatialPoints
+#' @importFrom sf st_as_sf
 #' @export
 #'
 
-strata_centroids <- function( data, stratum="Population", longitude="Longitude", latitude="Latitude") {
-  library(dplyr)
+strata_centroids <- function( data, stratum="Population", longitude="Longitude", latitude="Latitude", mode=c("data.frame","SpatialPoints", "sf")[1]) {
+
   if( !is.data.frame(data) ) {
     stop("You must pass a data.frame object to this function.")
   }
@@ -32,7 +35,25 @@ strata_centroids <- function( data, stratum="Population", longitude="Longitude",
     stop("You need top specify a x-coordiante.")
   }
 
-  df <- group_by( data, get(stratum) ) %>% summarize(X = mean( get(longitude)), Y = mean( get(latitude))  )
+  df <- dplyr::group_by( data, get(stratum) ) %>%
+    dplyr::summarize(X = mean( get(longitude)), Y = mean( get(latitude))  ) %>%
+    as.data.frame()
+
   names(df) <- c(stratum,longitude,latitude)
-  return(df)
+
+  if( mode == "SpatialPoints") {
+    ret <- data.frame(df[,c(2:3)])
+    row.names(ret) <- df[,1]
+    ret <- sp::SpatialPoints( ret[,c(longitude,latitude)] )
+    return(  ret )
+
+  }
+  else if( mode == "sf") {
+
+    return( sf::st_as_sf(x=df, coords=c(longitude,latitude) ) )
+
+  } else {
+    return(df)
+  }
+
 }
