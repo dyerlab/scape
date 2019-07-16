@@ -1,11 +1,15 @@
 Package: scape
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Convienence Functions for Geospatial Data Analysis (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Rodney J. Dyer
+Maintainer: Rodney J. Dyer <rjdyer@vcu.edu>
+Description: This package has routines supporting geospatial data analyses used in 
+    the teaching of Landscape Genetics and Landscape Ecology at Virginia Commonwealth 
+    University.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+  tidyverse
+RoxygenNote: 6.1.1
