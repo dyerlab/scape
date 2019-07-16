@@ -1,6 +1,5 @@
 test_that("missing data", {
 
-
   x <- 23.3
   expect_that( strata_centroids(x), throws_error("You must pass a data.frame object to this function.") )
 
