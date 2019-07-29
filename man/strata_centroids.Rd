@@ -17,6 +17,8 @@ stratum designations.}
 \item{longitude}{The name of the column with the X-coordinate (default = Longitude)}
 
 \item{latitude}{The name of the column with the Y-coordinate (default = Latitude)}
+
+\item{mode}{The format of the returned object as a data.frame (default), spatialPoints or sf object.}
 }
 \value{
 A data.frame object with strata and latitude and longitude
